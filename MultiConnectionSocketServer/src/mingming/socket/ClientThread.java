@@ -29,11 +29,14 @@ public class ClientThread implements Runnable {
 				try {
 				    output = new PrintWriter(mSocket.getOutputStream(),true);
 					input = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
-					
+					System.out.println("a client connects... ");
 					while(!mSocket.isClosed())
 					{
-						String inputData = input.readLine();
-						System.out.println("data from client: " + id + " is: " + inputData);
+						if(input != null && input.ready())
+						{
+							String inputData = input.readLine();
+							System.out.println("data from client: " + id + " is: " + inputData);
+						}
 					}
 					
 				} catch (IOException e) {
